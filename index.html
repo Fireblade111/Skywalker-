@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skywalker’s Website 🌱</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    background-image: url('https://images.unsplash.com/photo-1563729784477-b7874175d5b6?auto=format&fit=crop&w=1950&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+  .wrap {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 12px;
+  }
+  header, section, footer {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.5);
+    text-align: center;
+  }
+  h1, h2, h3 { margin: 10px 0; animation: rainbow 10s infinite; }
+  a { color: #ffb347; text-decoration: none; transition: 0.3s; }
+  a:hover { color: #0f0; }
+  button { padding: 10px 20px; margin-top: 10px; background-color: #0f0; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+  button:hover { background-color: #ffb347; color: #000; transform: scale(1.05); }
+  body::after {
+    content: "Skywalker";
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.15;
+    font-size: 24px;
+    color: white;
+    z-index: 1;
+  }
+  @keyframes rainbow {
+    0%{color:#ff0000;} 10%{color:#ff7f00;} 20%{color:#ffff00;}
+    30%{color:#00ff00;} 40%{color:#0000ff;} 50%{color:#4b0082;}
+    60%{color:#9400d3;} 70%{color:#ff1493;} 80%{color:#00ced1;}
+    90%{color:#ff4500;} 100%{color:#ff0000;}
+  }
+  .floating-leaf {
+    position: fixed;
+    font-size: 24px;
+    top: -50px;
+    z-index: 0;
+    animation: floatLeaf linear infinite;
+  }
+  @keyframes floatLeaf {
+    0% { transform: translateY(0) rotate(0deg);}
+    100% { transform: translateY(110vh) rotate(360deg);}
+  }
+  ol.leaderboard { padding-left: 18px; text-align: left; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Welcome to Skywalker’s Website 🌱</h1>
+    <p>Good Morning, Skywalker 🌿☀️</p>
+  </header>
+
+  <section class="about">
+    <h2>About Me</h2>
+    <p>I’m Skywalker, learning coding and building my first website. Everything here is mine 🌿.</p>
+  </section>
+
+  <section class="mini-games">
+    <h2>Skywalker Score 🏆</h2>
+    <p>Your Score: <span id="scoreDisplay">0</span></p>
+    <button id="addPoint">Add Point</button>
+    <button id="mathGameBtn">Play Quick Math 🧮</button>
+    <h3>Leaderboard</h3>
+    <ol id="leaderboardList" class="leaderboard"></ol>
+  </section>
+
+  <section class="quote">
+    <h2>Quote of the Day 🌿</h2>
+    <p id="quoteText"></p>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Me 🌿</h2>
+    <p>WhatsApp: <a href="https://wa.me/+263782167821?text=Hie+Skywalker+Lets+chat💬+together🍓" target="_blank">+263 782 167 821</a><br>
+       Facebook: <a href="https://www.facebook.com/profile.php?id=61554251056337&mibextid=rS40aB7S9Ucbxw6" target="_blank">Profile</a><br>
+       TikTok: <a href="https://vm.tiktok.com/ZMHcUNP3hgmyH-iyfqw/" target="_blank">TikTok</a>
+    </p>
+    <button id="downloadCv">Download CV</button>
+  </section>
+
+  <footer>
+    <p>© 2025 Skywalker | All Rights Reserved 🌿</p>
+  </footer>
+</div>
+
+<div class="floating-leaf" style="left:10vw; animation-duration:12s">🍃</div>
+<div class="floating-leaf" style="left:60vw; animation-duration:18s; font-size:28px">🍃</div>
+
+<script>
+let score = 0;
+const scoreDisplay = document.getElementById("scoreDisplay");
+const leaderboardList = document.getElementById("leaderboardList");
+let leaderboard = [];
+
+function updateLeaderboard(name, newScore){
+  const existing = leaderboard.find(item => item.name === name);
+  if(existing){ existing.score = newScore; } 
+  else { leaderboard.push({name:name, score:newScore}); }
+  leaderboard.sort((a,b)=>b.score-a.score);
+  leaderboardList.innerHTML = "";
+  leaderboard.forEach(item=>{
+    const li = document.createElement("li");
+    li.textContent = `${item.name}: ${item.score}`;
+    leaderboardList.appendChild(li);
+  });
+}
+
+document.getElementById("addPoint").addEventListener("click", ()=>{
+  score++;
+  scoreDisplay.textContent = score;
+  updateLeaderboard("Visitor", score);
+});
+
+document.getElementById("mathGameBtn").addEventListener("click", ()=>{
+  const a = Math.floor(Math.random()*20)+1;
+  const b = Math.floor(Math.random()*20)+1;
+  const answer = prompt(`Solve: ${a} + ${b} = ?`);
+  if(parseInt(answer) === a+b){
+    alert("✅ Correct! +5 points");
+    score +=5;
+    scoreDisplay.textContent = score;
+    updateLeaderboard("Visitor", score);
+  } else {
+    alert("❌ Wrong! Try again next time.");
+  }
+});
+
+const quotes = [
+  `"The secret of getting ahead is getting started." – Mark Twain`,
+  `"Believe in yourself and all that you are." – Christian Larson`,
+  `"Success is not final, failure is not fatal." – Winston Churchill`,
+  `"Do what you can, with what you have, where you are." – Theodore Roosevelt`,
+  `"Never give up on something you really want." – Unknown`
+];
+const quoteText = document.getElementById("quoteText");
+quoteText.textContent = quotes[Math.floor(Math.random()*quotes.length)];
+
+document.getElementById('downloadCv').addEventListener('click', ()=>{
+  const cv = `
+Skywalker
+Student & Web Dev
+
+Profile:
+Passionate learner building interactive web projects.
+
+Contact:
+WhatsApp: +263 782 167 821
+
+Skills:
+HTML, CSS, JavaScript
+`;
+  const blob = new Blob([cv], {type:'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'Skywalker-CV.txt'; a.click(); URL.revokeObjectURL(url);
+});
+</script>
+</body>
+</html>
