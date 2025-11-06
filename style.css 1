@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  background: black;
+  font-family: Arial, sans-serif;
+  color: gold;
+  text-align: center;
+}
+
+header {
+  padding: 20px;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px gold; }
+  to { text-shadow: 0 0 25px gold; }
+}
+
+.avatar img {
+  width: 200px;
+  margin: 20px auto;
+  border-radius: 50%;
+  border: 5px solid gold;
+  box-shadow: 0 0 25px gold;
+}
+
+.social {
+  margin-top: 20px;
+}
+
+.btn {
+  display: block;
+  width: 80%;
+  max-width: 300px;
+  margin: 10px auto;
+  padding: 12px;
+  color: black;
+  background: gold;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: white;
+}
+
+footer {
+  font-size: 14px;
+  padding: 20px;
+  opacity: 0.6;
+}
